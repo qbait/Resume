@@ -73,7 +73,7 @@ class ResumeFragment : BaseFragment() {
         }
 
         resume.work.forEach {
-            extendedRow {
+            basicRow {
                 id(it.company)
                 heading(viewModel.formatWorkHeading(it.company, it.position))
                 title(viewModel.formatPeriod(it.startDate, it.endDate))
@@ -87,7 +87,7 @@ class ResumeFragment : BaseFragment() {
         }
 
         resume.education.forEach {
-            extendedRow {
+            basicRow {
                 id(it.institution)
                 heading(it.institution)
                 title(viewModel.formatPeriod(it.startDate, it.endDate))
