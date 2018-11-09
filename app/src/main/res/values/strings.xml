@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Resume</string>
+    <string name="summary">Summary</string>
+    <string name="experience">Experience</string>
+    <string name="education">Education</string>
+    <string name="languages">Languages</string>
+</resources>
