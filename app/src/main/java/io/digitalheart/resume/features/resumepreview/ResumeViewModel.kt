@@ -1,13 +1,16 @@
 package io.digitalheart.resume.features.resumepreview
 
+import android.content.res.Resources
 import android.support.v4.app.FragmentActivity
-import io.digitalheart.resume.network.ResumeService
 import com.airbnb.mvrx.*
+import io.digitalheart.resume.R
 import io.digitalheart.resume.core.MvRxViewModel
 import io.digitalheart.resume.models.Resume
+import io.digitalheart.resume.network.ResumeService
 import io.digitalheart.resume.utils.printDate
 import io.digitalheart.resume.utils.toLocalDate
 import org.koin.android.ext.android.inject
+import org.threeten.bp.format.DateTimeParseException
 
 data class ResumeState(
     val request: Async<Resume> = Uninitialized
@@ -15,12 +18,9 @@ data class ResumeState(
 
 class ResumeViewModel(
     initialState: ResumeState,
+    private val resources: Resources,
     private val resumeService: ResumeService
 ) : MvRxViewModel<ResumeState>(initialState) {
-
-    init {
-        fetchResume()
-    }
 
     fun fetchResume() = withState { state ->
         if (state.request is Loading) return@withState
@@ -30,14 +30,41 @@ class ResumeViewModel(
             .execute { copy(request = it) }
     }
 
-    fun formatPeriod(startDate: String, endDate: String): String = "${startDate.toLocalDate().printDate()} - ${endDate.toLocalDate().printDate()}"
-    fun formatEducationSubtitle(studyType: String, area: String): String {
-        return "$studyType of $area"
+    fun formatPeriod(startDate: String, endDate: String): String {
+        val prettyStartDate = try {
+            val startLocalDate = startDate.toLocalDate()
+            startLocalDate.printDate()
+        } catch (exception: DateTimeParseException) {
+            return ""
+        }
+
+        val prettyEndDate = if(endDate.isEmpty())
+            resources.getString(R.string.now)
+        else try {
+            val endLocalDate = endDate.toLocalDate()
+            endLocalDate.printDate()
+        } catch (exception: DateTimeParseException) {
+            return ""
+        }
+
+        return "$prettyStartDate - $prettyEndDate"
     }
 
-    fun formatWorkHeading(company: String, position: String): String {
-        return "$company, $position"
-    }
+    fun formatEducationSubtitle(studyType: String, area: String): String =
+        when {
+            studyType.isNotEmpty() && area.isNotEmpty() -> resources.getString(R.string.of, studyType, area)
+            studyType.isEmpty() && area.isNotEmpty() -> area
+            studyType.isNotEmpty() && area.isEmpty() -> studyType
+            else -> ""
+        }
+
+    fun formatWorkHeading(company: String, position: String): String =
+        when {
+            company.isNotEmpty() && position.isNotEmpty() -> resources.getString(R.string.at, position, company)
+            company.isEmpty() && position.isNotEmpty() -> position
+            company.isNotEmpty() && position.isEmpty() -> company
+            else -> ""
+        }
 
     companion object : MvRxViewModelFactory<ResumeState> {
         @JvmStatic
@@ -46,7 +73,8 @@ class ResumeViewModel(
             state: ResumeState
         ): BaseMvRxViewModel<ResumeState> {
             val service: ResumeService by activity.inject()
-            return ResumeViewModel(state, service)
+            val resources: Resources by activity.inject()
+            return ResumeViewModel(state, resources, service)
         }
     }
 }

@@ -4,4 +4,7 @@
     <string name="experience">Experience</string>
     <string name="education">Education</string>
     <string name="languages">Languages</string>
+    <string name="of">%1$s of %2$s</string>
+    <string name="at">%1$s at %2$s</string>
+    <string name="now">now</string>
 </resources>

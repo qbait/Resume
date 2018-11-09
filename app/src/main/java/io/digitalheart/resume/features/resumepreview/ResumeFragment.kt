@@ -27,6 +27,7 @@ class ResumeFragment : BaseFragment() {
             loadingRow {
                 id("loading")
             }
+            viewModel.fetchResume()
             return@simpleController
         }
 
