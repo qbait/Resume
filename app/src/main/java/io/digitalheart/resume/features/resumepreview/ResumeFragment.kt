@@ -7,7 +7,10 @@ import io.digitalheart.resume.R
 import io.digitalheart.resume.core.BaseFragment
 import io.digitalheart.resume.core.simpleController
 import io.digitalheart.resume.utils.snack
-import io.digitalheart.resume.views.*
+import io.digitalheart.resume.views.basicRow
+import io.digitalheart.resume.views.image
+import io.digitalheart.resume.views.loadingRow
+import io.digitalheart.resume.views.marquee
 
 
 class ResumeFragment : BaseFragment() {

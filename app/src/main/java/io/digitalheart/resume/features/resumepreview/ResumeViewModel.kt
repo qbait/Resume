@@ -38,7 +38,7 @@ class ResumeViewModel(
             return ""
         }
 
-        val prettyEndDate = if(endDate.isEmpty())
+        val prettyEndDate = if (endDate.isEmpty())
             resources.getString(R.string.now)
         else try {
             val endLocalDate = endDate.toLocalDate()

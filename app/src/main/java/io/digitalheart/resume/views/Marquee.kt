@@ -2,9 +2,7 @@ package io.digitalheart.resume.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp

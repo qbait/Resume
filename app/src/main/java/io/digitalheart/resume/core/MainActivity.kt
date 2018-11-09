@@ -1,7 +1,7 @@
 package io.digitalheart.resume.core
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import io.digitalheart.resume.R
 
 class MainActivity : AppCompatActivity() {

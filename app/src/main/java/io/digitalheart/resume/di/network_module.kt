@@ -1,9 +1,9 @@
 package io.digitalheart.resume.di
 
-import io.digitalheart.resume.network.ResumeService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.digitalheart.resume.di.ApiProperties.URL
+import io.digitalheart.resume.network.ResumeService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.applicationContext
