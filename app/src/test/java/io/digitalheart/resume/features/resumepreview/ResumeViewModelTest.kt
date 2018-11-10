@@ -14,8 +14,9 @@ import io.digitalheart.resume.network.ResumeService
 import io.digitalheart.resume.utils.RxSchedulersOverrideRule
 import io.reactivex.Single
 import io.reactivex.subjects.SingleSubject
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.Assert
+import org.amshove.kluent.shouldEqual
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,13 +46,15 @@ class ResumeViewModelTest : AutoCloseKoinTest() {
 
         verify(service).fetch()
 
-        withState(viewModel) { Assert.assertTrue(it.request is Loading) }
+        withState(viewModel) {
+            (it.request is Loading) shouldBe true
+        }
 
         resumeSubject.onSuccess(resume)
 
         withState(viewModel) {
-            Assert.assertTrue(it.request is Success)
-            Assert.assertEquals(it.request(), resume)
+            (it.request is Success) shouldBe true
+            it.request() shouldEqual resume
         }
     }
 
@@ -65,8 +68,8 @@ class ResumeViewModelTest : AutoCloseKoinTest() {
         verify(service).fetch()
 
         withState(viewModel) {
-            Assert.assertTrue(it.request is Fail)
-            Assert.assertEquals(it.request(), null)
+            (it.request is Fail) shouldBe true
+            it.request() shouldEqual null
         }
     }
 
