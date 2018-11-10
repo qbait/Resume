@@ -1,8 +1,8 @@
 package io.digitalheart.resume.models
 
 data class Resume(
-    val basics: Basics,
-    val education: List<Education>,
-    val languages: List<Language>,
-    val work: List<Work>
+    val basics: Basics = Basics(),
+    val education: List<Education> = emptyList(),
+    val languages: List<Language> = emptyList(),
+    val work: List<Work> = emptyList()
 )
