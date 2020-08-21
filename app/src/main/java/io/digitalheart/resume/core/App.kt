@@ -5,7 +5,6 @@ import io.digitalheart.resume.di.appModule
 import io.digitalheart.resume.di.networkModule
 import org.koin.android.ext.android.startKoin
 
-
 class App : Application() {
 
     override fun onCreate() {

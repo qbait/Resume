@@ -1,6 +1,7 @@
 package io.digitalheart.resume.features.resumepreview
 
 import android.content.res.Resources
+import android.os.Build
 import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.Success
@@ -23,7 +24,9 @@ import org.junit.runner.RunWith
 import org.koin.standalone.inject
 import org.koin.test.AutoCloseKoinTest
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
+@Config(sdk = [Build.VERSION_CODES.P])
 @RunWith(RobolectricTestRunner::class)
 class ResumeViewModelTest : AutoCloseKoinTest() {
 

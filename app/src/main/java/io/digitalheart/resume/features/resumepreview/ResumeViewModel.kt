@@ -1,7 +1,6 @@
 package io.digitalheart.resume.features.resumepreview
 
 import android.content.res.Resources
-import android.support.v4.app.FragmentActivity
 import com.airbnb.mvrx.*
 import io.digitalheart.resume.R
 import io.digitalheart.resume.core.MvRxViewModel
@@ -66,14 +65,14 @@ class ResumeViewModel(
             else -> ""
         }
 
-    companion object : MvRxViewModelFactory<ResumeState> {
+    companion object : MvRxViewModelFactory<ResumeViewModel, ResumeState> {
         @JvmStatic
         override fun create(
-            activity: FragmentActivity,
+            viewModelContext: ViewModelContext,
             state: ResumeState
-        ): BaseMvRxViewModel<ResumeState> {
-            val service: ResumeService by activity.inject()
-            val resources: Resources by activity.inject()
+        ): ResumeViewModel {
+            val service: ResumeService by viewModelContext.activity.inject()
+            val resources: Resources by viewModelContext.activity.inject()
             return ResumeViewModel(state, resources, service)
         }
     }
